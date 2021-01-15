@@ -2,19 +2,29 @@ import './App.scss';
 import SearchBar from './components/SearchBar'
 import Gif from './components/Gif'
 import GifList from './components/GifList'
+import React, { useState } from 'react'
+import giphy from 'giphy-api'
 
 function App() {
-  const gifs = [
-    "13VJu6tRPDBF72",
-    "a93jwI0wkWTQs",
-    "xT5LMHxhOfscxPfIfm"
-  ];
+  const [gifs, setGifs] = useState([]);
+  const [selectedGifId, setSelectedGifID] = useState("13VJu6tRPDBF72");
+
+  const search = (query) => {
+    giphy(process.env.REACT_APP_GIPHY_API_KEY).search({
+    q:  query,
+        rating: 'g',
+        limit: 10,
+    }, function (err, res) {
+        setGifs(res.data);
+    });
+  };
+
   return (
     <div>
       <div className="left-scene ">
-        <SearchBar />
+        <SearchBar search={search}/>
         <div className="selected-gif">
-          <Gif id="13VJu6tRPDBF72"/>
+          <Gif id={selectedGifId}/>
         </div>
       </div>
       <div className="right-scene ">

@@ -1,8 +1,15 @@
 import React from 'react';
 
-const SearchBar = () => {
+const SearchBar = (props) => {
+  const handleChange = (event) => {
+    props.search((event.target.value));
+  }
   return (
-    <input type="text" className="form-control form-search" />
+    <input
+      type="text"
+      className="form-control form-search"
+      onChange={handleChange}
+    />
   );
 }
 
