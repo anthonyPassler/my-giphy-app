@@ -7,7 +7,7 @@ import giphy from 'giphy-api'
 
 function App() {
   const [gifs, setGifs] = useState([]);
-  const [selectedGifId, setSelectedGifID] = useState("13VJu6tRPDBF72");
+  const [selectedGifId, setSelectedGifID] = useState("");
 
   const search = (query) => {
     giphy(process.env.REACT_APP_GIPHY_API_KEY).search({
@@ -19,6 +19,10 @@ function App() {
     });
   };
 
+  const selectedGif = (id) => {
+    setSelectedGifID(id)
+  }
+
   return (
     <div>
       <div className="left-scene ">
@@ -28,7 +32,7 @@ function App() {
         </div>
       </div>
       <div className="right-scene ">
-        <GifList gifs={gifs}/>
+        <GifList selectedGif={selectedGif} gifs={gifs}/>
       </div>
     </div>
   );
