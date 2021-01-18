@@ -7,7 +7,7 @@ import giphy from 'giphy-api'
 
 function App() {
   const [gifs, setGifs] = useState([]);
-  const [selectedGifId, setSelectedGifID] = useState("");
+  const [selectedGifId, setSelectedGifID] = useState(null);
 
   const search = (query) => {
     giphy(process.env.REACT_APP_GIPHY_API_KEY).search({
